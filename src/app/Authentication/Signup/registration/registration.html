@@ -1,0 +1,178 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h1 class="text-center mb-4">Account Registration</h1>
+
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h4>User Details & Credentials</h4>
+                    </div>
+                    <div class="card-body">
+                        <div formGroupName="userDetails" class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                                <div *ngIf="registrationForm.get('userDetails.firstName')?.invalid && registrationForm.get('userDetails.firstName')?.touched"
+                                    class="text-danger">
+                                    First name is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" class="form-control" id="age" formControlName="age">
+                            </div>
+                        </div>
+                        <div formGroupName="credentials" class="row g-3">
+                            <div class="col-md-8">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" formControlName="Username">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" formControlName="Password">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirmPassword">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h4>Account Details</h4>
+                    </div>
+                    <div class="container" formGroupName="accountDetails">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="accountNumber" class="form-label">Account Number</label>
+                                <input type="text" class="form-control" id="accountNumber"
+                                    formControlName="accountNumber">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="bankName" class="form-label">Bank Name</label>
+                                <input type="text" class="form-control" id="bankName" formControlName="bankName">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ifscCode" class="form-label">IFSC Code</label>
+                                <input type="text" class="form-control" id="ifscCode" formControlName="ifscCode">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="bankCode" class="form-label">Bank Code</label>
+                                <input type="text" class="form-control" id="bankCode" formControlName="bankCode">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="branch" class="form-label">Branch</label>
+                                <input type="text" class="form-control" id="branch" formControlName="branch">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="upiId" class="form-label">UPI ID (Optional)</label>
+                                <input type="text" class="form-control" id="upiId" formControlName="upiId">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dateOfExpiry" class="form-label">Date of Expiry (MM/YY)</label>
+                                <input type="month" class="form-control" id="dateOfExpiry"
+                                    formControlName="dateOfExpiry">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label d-block">Account Type</label>
+                                <div *ngFor="let type of availableAccountTypes" class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="accountType-{{type}}"
+                                        [value]="type" (change)="onAccountTypeChange($event)">
+                                    <label class="form-check-label" for="accountType-{{type}}">{{ type }}</label>
+                                </div>
+                                <div class="form-text">Select one or more account types.</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="balance" class="form-label">Initial Balance ($)</label>
+                                <input type="number" class="form-control" id="balance" formControlName="balance">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="nominee" class="form-label">Nominee Full Name</label>
+                                <input type="text" class="form-control" id="nominee" formControlName="nominee">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="relationWithNominee" class="form-label">Relation with Nominee</label>
+                                <input type="text" class="form-control" id="relationWithNominee"
+                                    formControlName="relationWithNominee">
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="isActive"
+                                        formControlName="isActive">
+                                    <label class="form-check-label" for="isActive">Account is Active</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h4>Address & Roles</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <div formGroupName="address" class="row g-3 mb-4">
+                            <div class="col-12">
+                                <label for="street" class="form-label">Street Address</label>
+                                <input type="text" class="form-control" id="street" formControlName="Street">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" class="form-control" id="city" formControlName="City">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="state" class="form-label">State / Province</label>
+                                <input type="text" class="form-control" id="state" formControlName="State">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="zipCode" class="form-label">Zip Code</label>
+                                <input type="text" class="form-control" id="zipCode" formControlName="ZipCode">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="country" class="form-label">Country</label>
+                                <input type="text" class="form-control" id="country" formControlName="Country">
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label d-block">Account Roles</label>
+                                <div *ngFor="let role of availableRoles" class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="role-{{role}}" [value]="role"
+                                        (change)="onRoleChange($event)">
+                                    <label class="form-check-label" for="role-{{role}}">{{ role }}</label>
+                                </div>
+                                <div *ngIf="registrationForm.get('roles')?.invalid && registrationForm.touched"
+                                    class="text-danger">
+                                    Please select at least one role.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <!-- <button type="submit" class="btn btn-primary btn-lg px-5" [disabled]="registrationForm.invalid"> -->
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        Register Account
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

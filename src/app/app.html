@@ -1,7 +1,8 @@
-
 <nav>
-  <a href="">Home</a>
-  <a href="About">About</a>
-  <a href="Contact">Contact</a>
+  <a routerLink="/" routerLinkActive="active">Home</a>
+  <a routerLink="/about" routerLinkActive="active">About</a>
+  <a routerLink="/contact" routerLinkActive="active">Contact</a>
 </nav>
-<router-outlet></router-outlet>
+<main>
+  <router-outlet></router-outlet>
+</main>

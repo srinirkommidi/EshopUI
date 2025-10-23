@@ -1,0 +1,64 @@
+/* registration.component.css */
+
+/* 1. Card Spacing */
+/* Adds space below each card section to clearly separate the form groups. */
+.card {
+    margin-bottom: 25px; 
+    border-radius: 10px; /* Optional: Adds slight rounding to card corners */
+    border: 1px solid #e0e0e0; /* Optional: Light border for definition */
+}
+
+/* 2. Header Customization */
+/* Makes the card headers a little more visually interesting. */
+.card-header {
+    font-weight: 600;
+    padding: 15px 20px;
+    border-bottom: none; /* Remove default Bootstrap bottom border */
+    border-radius: 10px 10px 0 0 !important; /* Ensure header corners are rounded */
+}
+
+/* Reset margin for the h4 inside the header */
+.card-header h4 {
+    margin-bottom: 0;
+    font-size: 1.25rem;
+}
+
+/* 3. Form Body Padding */
+/* Ensures uniform padding around all fields within the card body. */
+.card-body {
+    padding: 20px;
+}
+
+/* 4. Validation Error Styling */
+/* Enhances the visibility and placement of error messages. */
+.text-danger {
+    font-size: 0.85rem;
+    padding-top: 3px;
+    display: block; /* Ensure the error message takes a new line */
+}
+
+/* 5. Input Focus Effect */
+/* Adds a cleaner focus state than the default Bootstrap blue outline. */
+.form-control:focus, .form-check-input:focus {
+    border-color: #66b5ff; /* Lighter blue/primary color */
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Subtle glow */
+}
+
+/* 6. Form Text (Hints) */
+/* Styling for smaller descriptive text below fields. */
+.form-text {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* 7. Checkbox/Radio Layout */
+/* Ensures inline checkboxes/radios have consistent spacing. */
+.form-check-inline {
+    margin-right: 1.5rem;
+}
+
+/* 8. Main Container Width */
+/* Optional: Limits the max width slightly more for very large screens */
+.container {
+    max-width: 1200px;
+}

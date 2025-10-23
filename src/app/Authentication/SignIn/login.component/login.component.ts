@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LogserviceSvc } from '../../Services/logservice.svc';
+import { LogserviceSvc } from '../../../Services/logservice.svc';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Registration } from '../../Signup/registration/registration';
 @Component({
   selector: 'app-login.component',
   imports: [FormsModule,CommonModule],
@@ -30,5 +31,9 @@ export class LoginComponent {
     {
       alert ("Unsuccessfull");
     }
+  }
+  onRegister(){
+    alert("Navigate to Registration Page");
+    this.route.navigateByUrl('/registration')
   }
 }
