@@ -26,12 +26,11 @@ export interface UserDetails{
     firstName: string;
     lastName: string;
     age?: number;
-    email: string;
+    username: string;
     password: string;
-    phoneNumber: string;
-    address: Address;
-    accountDetails: AccountDetails;
-    role: Roles;
+    address?: Address;
+    accountDetails?: AccountDetails;
+    role?: Roles;
 }
 
 export enum AccountType

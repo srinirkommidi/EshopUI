@@ -14,10 +14,12 @@
                             <div class="col-md-6">
                                 <label for="firstName" class="form-label">First Name</label>
                                 <input type="text" class="form-control" id="firstName" formControlName="firstName">
-                                <div *ngIf="registrationForm.get('userDetails.firstName')?.invalid && registrationForm.get('userDetails.firstName')?.touched"
-                                    class="text-danger">
+                                @if (registrationForm.get('userDetails.firstName')?.invalid &&
+                                registrationForm.get('userDetails.firstName')?.touched) {
+                                <div class="text-danger">
                                     First name is required.
                                 </div>
+                                }
                             </div>
                             <div class="col-md-6">
                                 <label for="lastName" class="form-label">Last Name</label>
@@ -27,15 +29,14 @@
                                 <label for="age" class="form-label">Age</label>
                                 <input type="number" class="form-control" id="age" formControlName="age">
                             </div>
-                        </div>
-                        <div formGroupName="credentials" class="row g-3">
+                
                             <div class="col-md-8">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" formControlName="Username">
+                                <input type="text" class="form-control" id="username" formControlName="username">
                             </div>
                             <div class="col-md-6">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" formControlName="Password">
+                                <input type="password" class="form-control" id="password" formControlName="password">
                             </div>
                             <div class="col-md-6">
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
@@ -83,11 +84,14 @@
 
                             <div class="col-md-6">
                                 <label class="form-label d-block">Account Type</label>
-                                <div *ngFor="let type of availableAccountTypes" class="form-check form-check-inline">
+
+                                @for (type of availableAccountTypes; track type) {
+                                <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="accountType-{{type}}"
                                         [value]="type" (change)="onAccountTypeChange($event)">
                                     <label class="form-check-label" for="accountType-{{type}}">{{ type }}</label>
                                 </div>
+                                }
                                 <div class="form-text">Select one or more account types.</div>
                             </div>
 
@@ -150,15 +154,20 @@
                         <div class="row g-3">
                             <div class="col-12">
                                 <label class="form-label d-block">Account Roles</label>
-                                <div *ngFor="let role of availableRoles" class="form-check form-check-inline">
+
+                                @for (role of availableRoles; track role) {
+                                <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="role-{{role}}" [value]="role"
                                         (change)="onRoleChange($event)">
                                     <label class="form-check-label" for="role-{{role}}">{{ role }}</label>
                                 </div>
-                                <div *ngIf="registrationForm.get('roles')?.invalid && registrationForm.touched"
-                                    class="text-danger">
+                                }
+
+                                @if (registrationForm.get('roles')?.invalid && registrationForm.touched) {
+                                <div class="text-danger">
                                     Please select at least one role.
                                 </div>
+                                }
                             </div>
                         </div>
 
@@ -166,8 +175,8 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <!-- <button type="submit" class="btn btn-primary btn-lg px-5" [disabled]="registrationForm.invalid"> -->
-                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                    <button type="submit" class="btn btn-primary btn-lg px-5" [disabled]="registrationForm.invalid">
+                   
                         Register Account
                     </button>
                 </div>

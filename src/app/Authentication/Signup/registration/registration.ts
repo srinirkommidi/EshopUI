@@ -4,6 +4,7 @@ import { FormsModule , FormGroup, Validators, FormArray,FormBuilder,FormControl}
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserDetails } from '../../../Models/user-details';
+import { RegistrationSvc } from '../../../Services/registration.svc';
 @Component({
   selector: 'app-registration',
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
@@ -17,21 +18,16 @@ export class Registration implements OnInit {
   availableAccountTypes = ['Savings', 'Checking', 'Current', 'FixedDeposit'];
   availableRoles = ['User', 'Admin', 'Manager', 'Premium'];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private registrationSvc: RegistrationSvc) {}
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
-      user: this.fb.group({
+      userDetails: this.fb.group({
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         age: ['', [Validators.required, Validators.min(0)]],
-      }),
-      credentials: this.fb.group({
         username: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required]]
-        // Note: For a real app, you'd add a custom validator to compare password & confirmPassword.
+        password: ['', [Validators.required, Validators.minLength(6)]]
       }),
       // --- Account Details ---
       accountDetails: this.fb.group({
@@ -84,9 +80,14 @@ export class Registration implements OnInit {
   }
   onSubmit(): void {
     if (this.registrationForm.valid) {
-      alert("Form Submitted Successfully!");
+      this.registrationSvc.registerUser(this.registrationForm.value.userDetails).subscribe(response => {
+              alert("Form Submitted Successfully!");
+        console.log('User registered successfully', response);
+      }, error => {
+        console.error('Error registering user', error);
+      });
       console.log(this.registrationForm.value);
-      // Handle successful registration
+      
     }
   }
 }
